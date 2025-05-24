@@ -1,51 +1,42 @@
-# Retail Shop Management System (Java Console App)
+# Retail Shop Management System
 
-A simple Java-based console application for managing a retail shop's inventory, customer cart, and checkout process using Object-Oriented Programming (OOP) principles.
+![Java](https://img.shields.io/badge/Java-17%2B-blue)
+![OOP](https://img.shields.io/badge/OOP-Design-success)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+A console-based retail shop management system built with Java, implementing core Object-Oriented Programming principles for product management, shopping cart functionality, and checkout processing.
 
 ## Features
 
-- **Product Management**
-  - Pre-loaded products with categories (Electronics, Shoes, Makeup, Others)
-  - Detailed product specifications (display, sizes, expiry dates etc.)
-  - Real-time stock tracking
+### Core Functionality
+- 🛒 **Product Catalog** with multiple categories (Electronics, Shoes, Makeup, Others)
+- 📋 **Detailed Product Information** including specifications and stock levels
+- 🛍️ **Shopping Cart System** with add/remove functionality
+- 💰 **Checkout Process** with total calculation
+- ⚡ **Direct Purchase** option (bypassing cart)
 
-- **Customer Operations**
-  - Add products to cart with stock validation
-  - View cart contents
-  - Checkout system with total calculation
-  - Direct purchase option (bypass cart)
-
-- **Category Navigation**
-  - Browse products by category
-  - Detailed product information display
+### Technical Highlights
+- Pure Java implementation (JDK 17+)
+- Clean OOP architecture
+- Memory-efficient data structures
+- Input validation and error handling
 
 ## Class Structure
 
-| Class | Description |
-|-------|-------------|
-| `Product` | Represents items with ID, name, price, category, specs, and stock |
-| `Customer` | Handles cart operations (add/view/checkout) and purchases |
-| `Shop` | Product catalog with search by category/ID |
-| `MainApp` | Console interface and program flow |
+| Class | Responsibility |
+|-------|----------------|
+| `Product` | Models products with attributes and specifications |
+| `Shop` | Manages product inventory and search functionality |
+| `Customer` | Handles cart operations and purchases |
+| `MainApp` | Provides the console interface and program flow |
 
-## Code Examples
+## Getting Started
 
-```java
-// Adding product to cart
-public void addToCart(Product p) {
-    if (p.stock > 0) {
-        cart.add(p);
-        p.stock--;
-        System.out.println(p.name + " added to cart.");
-    }
-}
+### Prerequisites
+- Java JDK 17 or later
+- Maven (optional)
 
-// Checking out
-public double checkout() {
-    double total = 0;
-    for (Product p : cart) {
-        total += p.price;
-    }
-    cart.clear();
-    return total;
-}
+### Installation
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/retail-shop-system.git
