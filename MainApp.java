@@ -73,9 +73,19 @@ public class MainApp {
                         if (action == 1) {
                             user.addToCart(selected);
                         } else if (action == 2) {
-                            double paid = user.buyDirect(selected);
+                            System.out.print("Do you have a coupon? (yes/no): ");
+                            String response = sc.nextLine().trim();
+                            String couponCode = "";
+
+                            if (response.equalsIgnoreCase("yes")) {
+                                Coupon.listAvailableCoupons();
+                                System.out.print("Enter coupon code: ");
+                                couponCode = sc.nextLine().trim();
+                            }
+
+                            double paid = user.buyDirectWithCoupon(selected, couponCode);
                             if (paid > 0) {
-                                System.out.println("Paid: $" + paid);
+                                System.out.printf("Paid: $%.2f\n", paid);
                             }
                         } else {
                             System.out.println("Cancelled.");
@@ -88,8 +98,23 @@ public class MainApp {
                     break;
 
                 case 3:
-                    double total = user.checkout();
-                    System.out.println("Total paid: $" + total);
+                    if (user.cart.isEmpty()) {
+                        System.out.println("Cart is empty.");
+                        break;
+                    }
+
+                    System.out.print("Do you have a coupon? (yes/no): ");
+                    String hasCoupon = sc.nextLine().trim();
+                    String code = "";
+
+                    if (hasCoupon.equalsIgnoreCase("yes")) {
+                        Coupon.listAvailableCoupons();
+                        System.out.print("Enter coupon code: ");
+                        code = sc.nextLine().trim();
+                    }
+
+                    double totalPaid = user.checkoutWithCoupon(code);
+                    System.out.printf("Total paid after discount: $%.2f\n", totalPaid);
                     break;
 
                 case 4:
