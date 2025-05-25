@@ -28,23 +28,40 @@ public class Customer {
         }
     }
 
-    public double checkout() {
+    public double checkoutWithCoupon(String code) {
         double total = 0;
         for (Product p : cart) {
             total += p.price;
         }
+
+        double discounted = Coupon.applyDiscount(total, code);
         cart.clear();
-        return total;
+
+        if (discounted < total) {
+            System.out.printf("Coupon applied! You saved $%.2f\n", total - discounted);
+        } else {
+            System.out.println("Invalid or no coupon applied.");
+        }
+
+        return discounted;
     }
 
-    public double buyDirect(Product p) {
+    public double buyDirectWithCoupon(Product p, String code) {
         if (p.stock > 0) {
             p.stock--;
+            double discountedPrice = Coupon.applyDiscount(p.price, code);
             System.out.println("You bought: " + p.name);
-            return p.price;
+            if (discountedPrice < p.price) {
+                System.out.printf("Coupon applied! You saved $%.2f\n", p.price - discountedPrice);
+            }
+            return discountedPrice;
         } else {
             System.out.println("Sorry, " + p.name + " is out of stock.");
             return 0;
         }
+    }
+
+    public double checkout() {
+        return checkoutWithCoupon("");
     }
 }
